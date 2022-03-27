@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -22,7 +22,7 @@ public class CustomerDTO {
     @Length(max = 255)
     private String title;
 
-    private ZonedDateTime createdAt;
+    private Instant createdAt;
 
-    private ZonedDateTime modifiedAt;
+    private Instant modifiedAt;
 }

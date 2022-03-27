@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/customers")
-@Api(value = "Customers",tags = {"Customers"})
+@Api(value = "Customers", tags = {"Customers"})
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -30,7 +30,7 @@ public class CustomerController {
 
     @GetMapping
     @ApiOperation(value = "Return paginated list of all customers", httpMethod = "GET")
-    public List<CustomerDTO> findAll(@RequestParam(defaultValue = "20") Integer pageSize){
+    public List<CustomerDTO> findAll(@RequestParam(defaultValue = "20") Integer pageSize) {
         return customerService.findAllCustomers(pageSize);
     }
 
@@ -38,27 +38,27 @@ public class CustomerController {
     @ApiOperation(value = "Create a new customer", httpMethod = "POST")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerDTO createCustomer(@Valid @RequestBody CustomerDTO customerDTO) throws ConstraintsViolationException {
-        CustomerDO customerDO = CustomerMapper.makeCustomerDo(customerDTO);
-        return CustomerMapper.makeCustomerDTO(customerService.create(customerDO));
+        CustomerDO customerDO = CustomerMapper.makeCustomerDO(customerDTO);
+        return CustomerMapper.makeCustomerDTO(customerService.createCustomer(customerDO));
     }
 
     @PutMapping("/{customerId}")
     @ApiOperation(value = "Edit customer", httpMethod = "PUT")
     public void updateCustomer(@PathVariable UUID customerId, @Valid @RequestBody CustomerDTO customerDTO) throws EntityNotFoundException {
-        CustomerDO customerDO = CustomerMapper.makeCustomerDo(customerDTO);
+        CustomerDO customerDO = CustomerMapper.makeCustomerDO(customerDTO);
         customerService.updateCustomer(customerId, customerDO);
     }
 
     @DeleteMapping("/{customerId}")
     @ApiOperation(value = "Delete customer", httpMethod = "DELETE")
     public void deleteCustomer(@PathVariable UUID customerId) throws EntityNotFoundException {
-        customerService.delete(customerId);
+        customerService.deleteCustomer(customerId);
     }
 
     @GetMapping("/{customerId}")
     @ApiOperation(value = "Return customer by id", httpMethod = "GET")
     public CustomerDTO findCustomer(@PathVariable UUID customerId) throws EntityNotFoundException {
-        CustomerDO customerDO = customerService.find(customerId);
+        CustomerDO customerDO = customerService.findCustomer(customerId);
         return CustomerMapper.makeCustomerDTO(customerDO);
     }
 }

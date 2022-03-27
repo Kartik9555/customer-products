@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -30,8 +30,8 @@ public class ProductDTO {
     @Positive
     private BigDecimal price;
 
-    private ZonedDateTime createdAt;
+    private Instant createdAt;
 
-    private ZonedDateTime modifiedAt;
+    private Instant modifiedAt;
 
 }

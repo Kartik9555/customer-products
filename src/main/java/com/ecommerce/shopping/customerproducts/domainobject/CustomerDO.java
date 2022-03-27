@@ -1,39 +1,25 @@
 package com.ecommerce.shopping.customerproducts.domainobject;
 
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name = "Customers")
+@Document(collection = "CUSTOMER")
 public class CustomerDO {
     @Id
-    @Type(type="uuid-char")
     private UUID id = UUID.randomUUID();
 
-    @Column(unique = true)
     private String title;
 
-    @Column(name = "IS_DELETED")
     private Boolean isDeleted;
 
-    @Column(nullable = false, name = "CREATED_AT")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private ZonedDateTime createdAt;
+    private Instant createdAt;
 
-    @Column(name = "MODIFIED_AT")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private ZonedDateTime modifiedAt;
+    private Instant modifiedAt;
 
-    @OneToMany(mappedBy="customer")
     private Set<ProductDO> products;
 
     public CustomerDO() {
@@ -42,7 +28,7 @@ public class CustomerDO {
     public CustomerDO(String title) {
         this.title = title;
         this.isDeleted = Boolean.FALSE;
-        this.createdAt = ZonedDateTime.now();
+        this.createdAt = Instant.now();
         this.modifiedAt = null;
     }
 
@@ -70,19 +56,19 @@ public class CustomerDO {
         this.isDeleted = isDeleted;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getModifiedAt() {
+    public Instant getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Instant modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 

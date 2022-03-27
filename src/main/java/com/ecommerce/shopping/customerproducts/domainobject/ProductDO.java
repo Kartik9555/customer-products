@@ -1,49 +1,29 @@
 package com.ecommerce.shopping.customerproducts.domainobject;
 
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
-@Entity
-@Table(name = "PRODUCT")
+//@Entity
+//@Table(name = "PRODUCT")
 public class ProductDO {
 
     @Id
-    @Column(updatable = false, nullable = false)
-    @Type(type="uuid-char")
     private UUID id = UUID.randomUUID();
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private CustomerDO customer;
 
     private String title;
 
-    @Column(length = 1024)
     private String description;
 
-    @Column(precision=10, scale=2)
     private BigDecimal price;
 
-    @Column(name = "IS_DELETED")
     private Boolean isDeleted;
 
-    @Column(nullable = false, name = "CREATED_AT")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private ZonedDateTime createdAt;
+    private Instant createdAt;
 
-    @Column(name = "MODIFIED_AT")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private ZonedDateTime modifiedAt;
+    private Instant modifiedAt;
 
     public ProductDO() {
     }
@@ -53,7 +33,7 @@ public class ProductDO {
         this.description = description;
         this.price = price;
         this.isDeleted = Boolean.FALSE;
-        this.createdAt = ZonedDateTime.now();
+        this.createdAt = Instant.now();
         this.modifiedAt = null;
     }
 
@@ -63,14 +43,6 @@ public class ProductDO {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public CustomerDO getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerDO customer) {
-        this.customer = customer;
     }
 
     public String getTitle() {
@@ -105,19 +77,19 @@ public class ProductDO {
         this.isDeleted = isDeleted;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getModifiedAt() {
+    public Instant getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Instant modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }
