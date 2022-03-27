@@ -13,7 +13,7 @@ spring.data.mongodb.database
 - Run the following on the command line: (Windows)
 ```bash
 cd PATH/TO/PROJECT
-mvnw.cmd clean spring-boot:run
+clean spring-boot:run
 ```
 - __Or__ from Intellij IDEA (during the development process): Run spring application (manually selecting in the run menu or just clicking on the play button next to the main method inside the ``com.ecommerce.shopping.customerproducts.CustomerProductsApplication`` class)
 
